@@ -1,0 +1,56 @@
+using System;
+using Gssoft.Gscad.Runtime;
+using Exporting_a_selection_from_Excel.Excel;
+using Exporting_a_selection_from_Excel.UI;
+using Exporting_a_selection_from_Excel.Workflow;
+using Gssoft.Gscad.ApplicationServices;
+
+[assembly: CommandClass(typeof(Exporting_a_selection_from_Excel.Start))]
+
+namespace Exporting_a_selection_from_Excel
+{
+    public class Start
+    {
+        [CommandMethod("Start")]
+        static public void DoIt()
+        {
+            try
+            {
+                var doc = Application.DocumentManager.MdiActiveDocument;
+                doc.Editor.WriteMessage("\nКоманда загружена. Используйте меню для поиска в Excel и загрузки результата в чертеж.");
+            }
+            catch (System.Exception ex)
+            {
+                String str = ex.ToString();
+            }
+        }
+
+        [CommandMethod("MENU")]
+        public static void ExcelLaunchMenu()
+        {
+            var doc = Application.DocumentManager.MdiActiveDocument;
+            var ed = doc.Editor;
+
+            try
+            {
+                using (var form = new ExcelLaunchForm())
+                {
+                    // Prefer CAD-hosted modal dialog if available in this API.
+                    var dr = Application.ShowModalDialog(form);
+                    if (dr != System.Windows.Forms.DialogResult.OK || form.Settings == null)
+                        return;
+
+                    var settings = form.Settings;
+                    var result = ExcelOleDbSearcher.Search(settings);
+
+                    ExcelToDrawingLoader.LoadResultIntoDrawing(doc, settings, result);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                ed.WriteMessage($"\nXLSMENU failed: {ex.Message}");
+            }
+        }
+    }
+}
+
