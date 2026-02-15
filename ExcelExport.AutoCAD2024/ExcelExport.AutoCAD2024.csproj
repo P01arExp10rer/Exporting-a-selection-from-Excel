@@ -28,6 +28,9 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AcCoreMgd">
       <HintPath>$(AutoCAD2024Path)\AcCoreMgd.dll</HintPath>

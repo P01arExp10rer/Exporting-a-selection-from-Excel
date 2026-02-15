@@ -74,17 +74,28 @@ namespace Exporting_a_selection_from_Excel.Excel
 
                 var symbolColumnName = settings.SymbolColumnName.Trim();
                 int searchColIndex = -1;
-                foreach (var kvp in columnIndexByName)
+
+                // Сначала пробуем интерпретировать как букву колонки Excel (A, B, V, AA, ...)
+                int? colByLetter = TryParseColumnLetter(symbolColumnName);
+                if (colByLetter.HasValue && colByLetter.Value >= 1)
                 {
-                    if (string.Equals(kvp.Key, symbolColumnName, StringComparison.OrdinalIgnoreCase))
+                    searchColIndex = colByLetter.Value;
+                }
+                else
+                {
+                    // Иначе ищем по имени в строке заголовков
+                    foreach (var kvp in columnIndexByName)
                     {
-                        searchColIndex = kvp.Value;
-                        break;
+                        if (string.Equals(kvp.Key, symbolColumnName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            searchColIndex = kvp.Value;
+                            break;
+                        }
                     }
                 }
 
                 if (searchColIndex == -1)
-                    throw new ArgumentException($"Column '{settings.SymbolColumnName}' not found in header row.", nameof(settings.SymbolColumnName));
+                    throw new ArgumentException($"Column '{settings.SymbolColumnName}' not found. Use column letter (A, B, AA) or exact header text.", nameof(settings.SymbolColumnName));
 
                 var symbols = settings.Symbols
                     .Where(s => !string.IsNullOrWhiteSpace(s))
@@ -121,6 +132,22 @@ namespace Exporting_a_selection_from_Excel.Excel
 
                 return dt;
             }
+        }
+
+        /// <summary>
+        /// Парсит букву колонки Excel (A=1, B=2, ..., Z=26, AA=27, ...). Возвращает 1-based индекс или null.
+        /// </summary>
+        private static int? TryParseColumnLetter(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return null;
+            s = s.Trim().ToUpperInvariant();
+            int result = 0;
+            foreach (char c in s)
+            {
+                if (c < 'A' || c > 'Z') return null;
+                result = result * 26 + (c - 'A' + 1);
+            }
+            return result > 0 ? result : (int?)null;
         }
     }
 }

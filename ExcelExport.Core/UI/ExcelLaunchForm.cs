@@ -30,11 +30,11 @@ namespace Exporting_a_selection_from_Excel.UI
             Text = "Поиск в Excel → загрузка в чертеж";
             StartPosition = FormStartPosition.CenterScreen;
             MinimizeBox = false;
-            MaximizeBox = false;
+            MaximizeBox = true;
             ShowInTaskbar = false;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            Width = 740;
-            Height = 520;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            Width = 900;
+            Height = 900;
 
             BuildUi();
         }
@@ -216,6 +216,18 @@ namespace Exporting_a_selection_from_Excel.UI
                 .Select(s => (s ?? string.Empty).Trim())
                 .Where(s => !string.IsNullOrWhiteSpace(s))
                 .ToList();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ExcelLaunchForm
+            // 
+            this.ClientSize = new System.Drawing.Size(1386, 564);
+            this.Name = "ExcelLaunchForm";
+            this.ResumeLayout(false);
+
         }
     }
 }

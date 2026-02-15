@@ -10,20 +10,6 @@ namespace Exporting_a_selection_from_Excel
 {
     public class ExcelExportCommands
     {
-        [CommandMethod("ExcelExport")]
-        public static void DoIt()
-        {
-            try
-            {
-                var doc = AcadApp.DocumentManager.MdiActiveDocument;
-                doc.Editor.WriteMessage("\nКоманда загружена. Используйте ExcelExportMenu для поиска в Excel и загрузки результата в чертеж.");
-            }
-            catch (System.Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-        }
-
         [CommandMethod("ExcelExportMenu")]
         public static void ExcelLaunchMenu()
         {

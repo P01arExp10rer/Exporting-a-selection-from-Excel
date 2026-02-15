@@ -12,20 +12,6 @@ namespace Exporting_a_selection_from_Excel
 {
     public class ExcelExportCommands
     {
-        [CommandMethod("ExcelExport")]
-        static public void DoIt()
-        {
-            try
-            {
-                var doc = GscadApp.DocumentManager.MdiActiveDocument;
-                doc.Editor.WriteMessage("\nКоманда загружена. Используйте меню для поиска в Excel и загрузки результата в чертеж.");
-            }
-            catch (System.Exception ex )
-            {
-                String str = ex.ToString();
-            }
-        }
-
         [CommandMethod("ExcelExportMenu")]
         public static void ExcelLaunchMenu()
         {

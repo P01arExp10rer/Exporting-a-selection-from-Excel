@@ -3,6 +3,7 @@
     "AutoCAD 2024": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2024\\acad.exe",
+      "commandLineArgs": "/product ACAD /language \"en-US\"",
       "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2024"
     }
   }
