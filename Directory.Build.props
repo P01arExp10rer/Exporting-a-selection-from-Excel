@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Путь к GstarCAD SDK (папка grxsdk). Задайте переменную окружения GSTARCAD_SDK_PATH или переопределите в командной строке: dotnet build /p:GstarCadSdkPath=C:\path\to\grxsdk -->
+    <GstarCadSdkPath Condition="'$(GstarCadSdkPath)' == ''">$(GSTARCAD_SDK_PATH)</GstarCadSdkPath>
+    <GstarCadSdkPath Condition="'$(GstarCadSdkPath)' == ''">C:\Program Files\GstarCAD\grxsdk</GstarCadSdkPath>
+  </PropertyGroup>
+</Project>
