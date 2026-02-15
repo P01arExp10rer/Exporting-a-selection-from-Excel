@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Exporting_a_selection_from_Excel.Workflow;
 using OfficeOpenXml;
+using System.Text;
 
 namespace Exporting_a_selection_from_Excel.Excel
 {
@@ -28,6 +29,7 @@ namespace Exporting_a_selection_from_Excel.Excel
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Excel file not found.", filePath);
 
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (var package = new ExcelPackage(new FileInfo(filePath)))

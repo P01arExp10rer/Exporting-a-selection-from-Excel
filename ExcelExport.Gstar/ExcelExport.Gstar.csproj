@@ -12,8 +12,13 @@
     <NoWarn>$(NoWarn);CA1416;NU1702</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="GstarCADNET" Version="26.0.0" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.1" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.3" />
     <ProjectReference Include="..\ExcelExport.Core\ExcelExport.Core.csproj" />
   </ItemGroup>
 </Project>
