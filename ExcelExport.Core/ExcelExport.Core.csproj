@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Exporting_a_selection_from_Excel</RootNamespace>
+    <AssemblyName>ExcelExport.Core</AssemblyName>
+    <OutputType>Library</OutputType>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="6.1.2" />
+  </ItemGroup>
+</Project>

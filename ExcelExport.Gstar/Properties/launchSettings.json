@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GstarCAD": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\GstarCAD\\GstarCAD\\gstarcad.exe",
+      "workingDirectory": "C:\\Program Files\\GstarCAD\\GstarCAD"
+    }
+  }
+}
