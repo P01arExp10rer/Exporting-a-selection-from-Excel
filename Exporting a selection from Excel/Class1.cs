@@ -6,13 +6,13 @@ using Exporting_a_selection_from_Excel.Workflow;
 using Gssoft.Gscad.ApplicationServices;
 using GscadApp = Gssoft.Gscad.ApplicationServices.Application;
 
-[assembly: CommandClass(typeof(Exporting_a_selection_from_Excel.Start))]
+[assembly: CommandClass(typeof(Exporting_a_selection_from_Excel.ExcelExportCommands))]
 
 namespace Exporting_a_selection_from_Excel
 {
-    public class Start
+    public class ExcelExportCommands
     {
-        [CommandMethod("Start")]
+        [CommandMethod("ExcelExport")]
         static public void DoIt()
         {
             try
@@ -20,13 +20,13 @@ namespace Exporting_a_selection_from_Excel
                 var doc = GscadApp.DocumentManager.MdiActiveDocument;
                 doc.Editor.WriteMessage("\nКоманда загружена. Используйте меню для поиска в Excel и загрузки результата в чертеж.");
             }
-            catch (System.Exception ex)
+            catch (System.Exception ex )
             {
                 String str = ex.ToString();
             }
         }
 
-        [CommandMethod("MENU")]
+        [CommandMethod("ExcelExportMenu")]
         public static void ExcelLaunchMenu()
         {
             var doc = GscadApp.DocumentManager.MdiActiveDocument;
@@ -49,7 +49,7 @@ namespace Exporting_a_selection_from_Excel
             }
             catch (System.Exception ex)
             {
-                ed.WriteMessage($"\nXLSMENU failed: {ex.Message}");
+                ed.WriteMessage($"\nExcelExportMenu failed: {ex.Message}");
             }
         }
     }
